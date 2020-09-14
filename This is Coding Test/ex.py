@@ -1,32 +1,20 @@
-import sys
-from operator import itemgetter
-
-n = int(sys.stdin.readline().rstrip())
-array = []
-
+n = int(input())
+studentScore = list(map(int, input().split()))
+package = []
 for i in range(n):
-    data_tmp = tuple(input().split(' '))
-    data = (data_tmp[0], int(data_tmp[1]), data_tmp[2])
+    package.append([studentScore[i], i])
 
-    if data[0] == 'I':
-        array.append(data)
-        if len(array) > 1:
-            for j in range(len(array)-1):
-                if array[j][1] == data[1] or array[j][2] == data[2]:
-                    array.pop()
-
-    elif data[0] == 'D':
-        if len(array) > 1:
-            for j in range(len(array)-1):
-                if array[j][1] == data[1]:
-                    array.pop(j)
-
-sorted_array = sorted(array, key=itemgetter(1))
-order = list(map(int, input().split()))
-
-for i in order:
-    print(sorted_array[i-1][1], sorted_array[i-1][2])
-
-
-
-
+# print(package)
+sortResult = sorted(package, key=lambda x: x[0], reverse=True)
+# print(sortResult)
+result = {}
+count = 1
+for i in range(n):
+    if i != 0:
+        if not (sortResult[i - 1][0] == sortResult[i][0]):
+            count = i + 1
+        result[sortResult[i][1]] = count
+    else:
+        result[sortResult[i][1]] = 1
+for i in range(n):
+    print(studentScore[i], result[i])
