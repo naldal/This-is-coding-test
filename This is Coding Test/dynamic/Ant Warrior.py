@@ -1,11 +1,28 @@
 n = int(input())
-array = list(map(int, input().split()))
+a, b = map(int, input().split())
+c = int(input())
+tp = []
 
-d = [0] * 100
+for i in range(n):
+    tp.append(int(input()))
 
-d[0] = array[0]
-d[1] = max(array[0], array[1])
-for i in range(2, n):
-    d[i] = max(d[i-1], d[i-2]+array[i])
+tmp_cal = c
+base_price = a
+maximum = tmp_cal // base_price
+tp = sorted(tp, reverse=True)
+for i in range(len(tp)):
+    tmp_cal += tp[i]
+    base_price += b
+    tmp_maximum = tmp_cal // base_price
+    # print(tmp_cal, base_price, tmp_maximum, maximum)
+    if tmp_maximum > maximum:
+        maximum = tmp_maximum
 
-print(d[n-1])
+print(maximum)
+
+
+
+
+
+
+
