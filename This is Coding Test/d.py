@@ -18,4 +18,5 @@ def check(n, top):
 
 
 result = check(n, top)
+
 print("good" if result else "bad")
